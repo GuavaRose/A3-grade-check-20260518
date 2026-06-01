@@ -182,6 +182,15 @@
             const tbody = document.getElementById('allStudentsTbody');
             
             if (listDiv.classList.contains('hidden')) {
+                // 檢查密碼
+                const password = prompt("請輸入助教密碼：");
+                if (password !== "GUAVA") {
+                    if (password !== null) { // 若不是按取消，就顯示錯誤
+                        alert("密碼錯誤，拒絕存取！");
+                    }
+                    return;
+                }
+
                 tbody.innerHTML = '';
                 studentData.forEach(s => {
                     const tr = document.createElement('tr');
