@@ -17,7 +17,7 @@
     <div class="bg-white rounded-xl shadow-lg max-w-lg w-full p-8">
         <div class="text-center mb-8">
             <h1 class="text-2xl font-bold text-gray-800 mb-2">出席與討論區成績查詢</h1>
-            <p class="text-sm text-gray-500">（統計截至 5/31）</p>
+            <p class="text-sm text-gray-500">（整學期最終統計）</p>
         </div>
 
         <div class="mb-6">
@@ -35,43 +35,62 @@
             <p id="errorMsg" class="text-red-500 text-sm mt-2 hidden">找不到符合的學生資料，請確認輸入是否正確。</p>
         </div>
 
-        <div id="resultContainer" class="hidden bg-blue-50 border border-blue-100 rounded-lg p-6 mb-8">
-            <h2 class="text-lg font-bold text-blue-800 mb-4 border-b border-blue-200 pb-2">查詢結果</h2>
-            <div class="space-y-3">
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-600">姓名</span>
-                    <span id="resName" class="font-semibold text-gray-900 text-lg"></span>
+        <!-- 查詢結果區塊 -->
+        <div id="resultContainer" class="hidden mb-8">
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-4 flex justify-between items-center shadow-sm">
+                <div>
+                    <span class="text-gray-600 text-sm">姓名</span>
+                    <div id="resName" class="font-bold text-gray-900 text-xl tracking-wide mt-1"></div>
                 </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-600">學號</span>
-                    <span id="resId" class="font-semibold text-gray-900"></span>
+                <div class="text-right">
+                    <span class="text-gray-600 text-sm">學號</span>
+                    <div id="resId" class="font-mono font-semibold text-blue-700 text-lg mt-1"></div>
                 </div>
-                <div class="h-px bg-blue-200 my-2"></div>
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-600">點名應到次數</span>
-                    <span class="font-bold text-gray-900 text-lg">12</span>
+            </div>
+
+            <!-- 出缺席區塊 -->
+            <div class="mb-5">
+                <h3 class="font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-3 flex justify-between items-end">
+                    <span>出缺席</span>
+                    <span class="text-xs font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded">總計應為 14 次</span>
+                </h3>
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm">
+                        <div class="text-xs text-gray-500 mb-1">出席次數</div>
+                        <div id="resPresent" class="text-xl font-bold text-green-600"></div>
+                    </div>
+                    <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm">
+                        <div class="text-xs text-gray-500 mb-1">請假次數</div>
+                        <div id="resLeave" class="text-xl font-bold text-gray-600"></div>
+                    </div>
+                    <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm">
+                        <div class="text-xs text-gray-500 mb-1">缺席<span class="scale-90 inline-block">(未請假)</span></div>
+                        <div id="resAbsent" class="text-xl font-bold"></div>
+                    </div>
                 </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-600">點名有到次數</span>
-                    <span id="resPresent" class="font-semibold text-green-600 text-lg"></span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-600">點名未到次數</span>
-                    <span id="resAbsent" class="font-semibold text-red-500 text-lg"></span>
-                </div>
-                <div class="h-px bg-blue-200 my-2"></div>
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-600">討論區繳交次數</span>
-                    <span id="resSubmit" class="font-semibold text-green-600 text-lg"></span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-gray-600">缺交次數</span>
-                    <span id="resMissing" class="font-semibold text-red-500 text-lg"></span>
+            </div>
+
+            <!-- 討論區作業區塊 -->
+            <div>
+                <h3 class="font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-3">討論區作業</h3>
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm flex flex-col justify-between">
+                        <div class="text-xs text-gray-500 mb-1">繳交次數</div>
+                        <div id="resSubmit" class="text-xl font-bold text-green-600"></div>
+                    </div>
+                    <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm flex flex-col justify-between">
+                        <div class="text-xs text-gray-500 mb-1">缺交次數</div>
+                        <div id="resMissing" class="text-xl font-bold"></div>
+                    </div>
+                    <div class="bg-white border border-gray-200 p-2 rounded-lg text-center shadow-sm flex flex-col justify-between">
+                        <div class="text-[11px] leading-tight text-gray-500 mb-1">缺席/請假<br>卻繳交次數</div>
+                        <div id="resAbsentSubmit" class="text-lg font-bold text-blue-600"></div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-yellow-800">
+        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-yellow-800 shadow-sm">
             <h3 class="font-bold mb-2 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
@@ -91,20 +110,22 @@
             </button>
         </div>
 
-        <div id="allStudentsList" class="hidden mt-4 bg-white border border-gray-200 rounded-lg overflow-x-auto max-h-96 shadow-inner">
+        <div id="allStudentsList" class="hidden mt-4 bg-white border border-gray-200 rounded-lg overflow-x-auto max-h-[500px] shadow-inner">
             <table class="w-full text-sm text-left text-gray-500">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-100 sticky top-0">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-100 sticky top-0 shadow-sm z-10">
                     <tr>
-                        <th scope="col" class="px-4 py-3 whitespace-nowrap">姓名</th>
-                        <th scope="col" class="px-4 py-3 whitespace-nowrap">學號</th>
-                        <th scope="col" class="px-4 py-3 text-center whitespace-nowrap">有到</th>
-                        <th scope="col" class="px-4 py-3 text-center whitespace-nowrap">未到</th>
-                        <th scope="col" class="px-4 py-3 text-center whitespace-nowrap">討論區</th>
-                        <th scope="col" class="px-4 py-3 text-center whitespace-nowrap">缺交</th>
+                        <th scope="col" class="px-3 py-3 whitespace-nowrap bg-gray-100 sticky left-0 z-20">姓名</th>
+                        <th scope="col" class="px-3 py-3 whitespace-nowrap">學號</th>
+                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap">出席</th>
+                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap">請假</th>
+                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap">缺席</th>
+                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap border-l border-gray-300">繳交</th>
+                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap">缺交</th>
+                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap">缺席/請假卻繳交</th>
                     </tr>
                 </thead>
                 <tbody id="allStudentsTbody">
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </div>
@@ -134,28 +155,37 @@
 
         async function initData() {
             try {
-                // 加上時間戳，防止瀏覽器讀取到舊的快取成績
                 const timestamp = new Date().getTime();
                 
-                // 改為只抓取單一檔案 state.csv
-                const stateRes = await fetch(`state.csv?t=${timestamp}`);
+                // 改為抓取您指定的檔案名稱。為避免中文檔名導致網址解析錯誤，使用 encodeURIComponent 處理
+                const fileName = encodeURIComponent('出席與討論區統計（整學期）.csv');
+                const stateRes = await fetch(`${fileName}?t=${timestamp}`);
 
                 if (!stateRes.ok) {
-                    throw new Error('找不到 state.csv 檔案');
+                    throw new Error('找不到指定的 CSV 檔案');
                 }
 
                 const csvState = await stateRes.text();
                 const stateData = parseCSV(csvState);
 
-                // 直接從單一檔案中提取所需欄位
+                // 取出並計算所需欄位
                 studentData = stateData.map(row => {
+                    // 原本的基礎欄位數值 (轉為整數確保計算正確，若為空則預設為 0)
+                    const baseSubmit = parseInt(row['討論區繳交次數'] || 0, 10);
+                    const baseMissing = parseInt(row['缺交次數'] || 0, 10);
+                    const extraSubmit = parseInt(row['缺席/請假卻繳交次數'] || 0, 10);
+                    const absent = parseInt(row['點名未到次數'] || 0, 10);
+
                     return {
                         name: row['姓名'],
                         id: row['學號'] || '',
-                        present: row['點名有到次數'],
-                        absent: row['點名未到次數'],
-                        submit: row['討論區繳交次數'],
-                        missing: row['缺交次數']
+                        present: parseInt(row['點名有到次數'] || 0, 10),
+                        leave: parseInt(row['請假次數'] || 0, 10),
+                        absent: absent,
+                        // 計算後的欄位
+                        calcSubmit: baseSubmit + extraSubmit,
+                        calcMissing: baseMissing - extraSubmit,
+                        absentSubmit: extraSubmit
                     };
                 }).filter(s => s.name);
 
@@ -170,7 +200,7 @@
                 const searchBtn = document.getElementById('searchBtn');
                 searchBtn.textContent = '資料讀取失敗';
                 searchBtn.classList.replace('bg-blue-600', 'bg-red-500');
-                alert('系統無法讀取成績檔案，請確認 GitHub 上是否已正確上傳名為 state.csv 的檔案。');
+                alert('系統無法讀取成績檔案，請確認 GitHub 上是否已正確上傳名為「出席與討論區統計（整學期）.csv」的檔案。');
             }
         }
 
@@ -185,7 +215,7 @@
                 // 檢查密碼
                 const password = prompt("請輸入助教密碼：");
                 if (password !== "GUAVA") {
-                    if (password !== null) { // 若不是按取消，就顯示錯誤
+                    if (password !== null) { 
                         alert("密碼錯誤，拒絕存取！");
                     }
                     return;
@@ -200,13 +230,24 @@
                         ? `<span class="font-mono text-blue-600">${s.id}</span>` 
                         : `<span class="text-red-500 font-bold text-xs bg-red-100 px-2 py-1 rounded">無學號資料</span>`;
                         
+                    // 助教總表的顏色標註邏輯
+                    const absentHtml = s.absent > 2 
+                        ? `<span class="text-red-600 font-bold">${s.absent}</span>` 
+                        : `<span class="text-gray-700">${s.absent}</span>`;
+                        
+                    const missingHtml = s.calcMissing > 2 
+                        ? `<span class="text-red-600 font-bold">${s.calcMissing}</span>` 
+                        : `<span class="text-gray-700">${s.calcMissing}</span>`;
+
                     tr.innerHTML = `
-                        <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">${s.name}</td>
-                        <td class="px-4 py-2 whitespace-nowrap">${idDisplay}</td>
-                        <td class="px-4 py-2 text-center text-green-600">${s.present}</td>
-                        <td class="px-4 py-2 text-center text-red-500">${s.absent}</td>
-                        <td class="px-4 py-2 text-center text-green-600">${s.submit}</td>
-                        <td class="px-4 py-2 text-center text-red-500">${s.missing}</td>
+                        <td class="px-3 py-2 font-medium text-gray-900 whitespace-nowrap bg-white sticky left-0 z-10 shadow-[1px_0_0_0_#e5e7eb]">${s.name}</td>
+                        <td class="px-3 py-2 whitespace-nowrap">${idDisplay}</td>
+                        <td class="px-2 py-2 text-center text-green-600">${s.present}</td>
+                        <td class="px-2 py-2 text-center text-gray-600">${s.leave}</td>
+                        <td class="px-2 py-2 text-center">${absentHtml}</td>
+                        <td class="px-2 py-2 text-center text-green-600 border-l border-gray-200">${s.calcSubmit}</td>
+                        <td class="px-2 py-2 text-center">${missingHtml}</td>
+                        <td class="px-2 py-2 text-center text-blue-600">${s.absentSubmit}</td>
                     `;
                     tbody.appendChild(tr);
                 });
@@ -235,9 +276,29 @@
                 document.getElementById('resName').textContent = student.name;
                 document.getElementById('resId').textContent = student.id;
                 document.getElementById('resPresent').textContent = student.present;
-                document.getElementById('resAbsent').textContent = student.absent;
-                document.getElementById('resSubmit').textContent = student.submit;
-                document.getElementById('resMissing').textContent = student.missing;
+                document.getElementById('resLeave').textContent = student.leave;
+                
+                // 處理缺席次數標色 (> 2 標紅)
+                const elAbsent = document.getElementById('resAbsent');
+                elAbsent.textContent = student.absent;
+                if (student.absent > 2) {
+                    elAbsent.className = "text-xl font-bold text-red-600";
+                } else {
+                    elAbsent.className = "text-xl font-bold text-gray-600";
+                }
+
+                document.getElementById('resSubmit').textContent = student.calcSubmit;
+                
+                // 處理缺交次數標色 (> 2 標紅)
+                const elMissing = document.getElementById('resMissing');
+                elMissing.textContent = student.calcMissing;
+                if (student.calcMissing > 2) {
+                    elMissing.className = "text-xl font-bold text-red-600";
+                } else {
+                    elMissing.className = "text-xl font-bold text-gray-600";
+                }
+
+                document.getElementById('resAbsentSubmit').textContent = student.absentSubmit;
                 
                 resultContainer.classList.remove('hidden');
             } else {
