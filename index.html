@@ -48,48 +48,27 @@
                 </div>
             </div>
 
-            <!-- 出缺席區塊 -->
+            <!-- 統計結果區塊 -->
             <div class="mb-5">
-                <h3 class="font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-3 flex justify-between items-end">
-                    <span>出缺席</span>
-                    <span class="text-xs font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded">總計應為 14 次</span>
-                </h3>
+                <h3 class="font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-3">統計結果</h3>
                 <div class="grid grid-cols-3 gap-3">
-                    <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm">
+                    <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm flex flex-col justify-between">
                         <div class="text-xs text-gray-500 mb-1">出席次數</div>
-                        <div id="resPresent" class="text-xl font-bold text-green-600"></div>
+                        <div id="resPresent" class="text-2xl font-bold text-green-600"></div>
                     </div>
-                    <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm">
+                    <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm flex flex-col justify-between">
                         <div class="text-xs text-gray-500 mb-1">請假次數</div>
-                        <div id="resLeave" class="text-xl font-bold text-gray-600"></div>
-                    </div>
-                    <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm">
-                        <div class="text-xs text-gray-500 mb-1">缺席<span class="scale-90 inline-block">(未請假)</span></div>
-                        <div id="resAbsent" class="text-xl font-bold"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 討論區作業區塊 -->
-            <div>
-                <h3 class="font-bold text-gray-800 border-b-2 border-gray-200 pb-2 mb-3">討論區作業</h3>
-                <div class="grid grid-cols-3 gap-3">
-                    <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm flex flex-col justify-between">
-                        <div class="text-xs text-gray-500 mb-1">繳交次數</div>
-                        <div id="resSubmit" class="text-xl font-bold text-green-600"></div>
+                        <div id="resLeave" class="text-2xl font-bold text-gray-600"></div>
                     </div>
                     <div class="bg-white border border-gray-200 p-3 rounded-lg text-center shadow-sm flex flex-col justify-between">
-                        <div class="text-xs text-gray-500 mb-1">缺交次數</div>
-                        <div id="resMissing" class="text-xl font-bold"></div>
-                    </div>
-                    <div class="bg-white border border-gray-200 p-2 rounded-lg text-center shadow-sm flex flex-col justify-between">
-                        <div class="text-[11px] leading-tight text-gray-500 mb-1">缺席/請假<br>卻繳交次數</div>
-                        <div id="resAbsentSubmit" class="text-lg font-bold text-blue-600"></div>
+                        <div class="text-xs text-gray-500 mb-1">作業繳交次數</div>
+                        <div id="resSubmit" class="text-2xl font-bold text-blue-600"></div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <!-- 注意事項區塊 -->
         <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-yellow-800 shadow-sm">
             <h3 class="font-bold mb-2 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
@@ -99,7 +78,7 @@
             </h3>
             <ol class="list-decimal pl-5 space-y-1">
                 <li>出缺席統計已經計入請假紀錄。</li>
-                <li>討論區作業繳交次數為繳交且符合規範的次數，缺交包含：未繳交、字數不足、內容不符等。該週缺席（點名未到）和請假但有繳交有計入繳交次數，但此一情形會影響最終成績。</li>
+                <li>討論區作業繳交次數為繳交且符合規範的次數，缺交包含：未繳交、字數不足、內容不符等。</li>
                 <li class="font-semibold text-red-600">對於結果有任何疑義，請向助教反映。</li>
             </ol>
         </div>
@@ -110,18 +89,16 @@
             </button>
         </div>
 
+        <!-- 助教測試名單表格 -->
         <div id="allStudentsList" class="hidden mt-4 bg-white border border-gray-200 rounded-lg overflow-x-auto max-h-[500px] shadow-inner">
             <table class="w-full text-sm text-left text-gray-500">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-100 sticky top-0 shadow-sm z-10">
                     <tr>
                         <th scope="col" class="px-3 py-3 whitespace-nowrap bg-gray-100 sticky left-0 z-20">姓名</th>
                         <th scope="col" class="px-3 py-3 whitespace-nowrap">學號</th>
-                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap">出席</th>
-                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap">請假</th>
-                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap">缺席</th>
-                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap border-l border-gray-300">繳交</th>
-                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap">缺交</th>
-                        <th scope="col" class="px-2 py-3 text-center whitespace-nowrap">缺席/請假卻繳交</th>
+                        <th scope="col" class="px-3 py-3 text-center whitespace-nowrap border-l border-gray-300">出席次數</th>
+                        <th scope="col" class="px-3 py-3 text-center whitespace-nowrap">請假次數</th>
+                        <th scope="col" class="px-3 py-3 text-center whitespace-nowrap">作業繳交次數</th>
                     </tr>
                 </thead>
                 <tbody id="allStudentsTbody">
@@ -141,7 +118,7 @@
             const data = [];
             
             for (let i = 1; i < lines.length; i++) {
-                if (!lines[i].trim()) continue; // 忽略空行
+                if (!lines[i].trim()) continue; 
                 
                 const values = lines[i].split(',');
                 const obj = {};
@@ -156,8 +133,6 @@
         async function initData() {
             try {
                 const timestamp = new Date().getTime();
-                
-                // 改為抓取您指定的檔案名稱。為避免中文檔名導致網址解析錯誤，使用 encodeURIComponent 處理
                 const fileName = encodeURIComponent('出席與討論區統計（整學期）.csv');
                 const stateRes = await fetch(`${fileName}?t=${timestamp}`);
 
@@ -168,28 +143,20 @@
                 const csvState = await stateRes.text();
                 const stateData = parseCSV(csvState);
 
-                // 取出並計算所需欄位
+                // 依據新規則計算所需欄位
                 studentData = stateData.map(row => {
-                    // 原本的基礎欄位數值 (轉為整數確保計算正確，若為空則預設為 0)
                     const baseSubmit = parseInt(row['討論區繳交次數'] || 0, 10);
-                    const baseMissing = parseInt(row['缺交次數'] || 0, 10);
                     const extraSubmit = parseInt(row['缺席/請假卻繳交次數'] || 0, 10);
-                    const absent = parseInt(row['點名未到次數'] || 0, 10);
 
                     return {
                         name: row['姓名'],
                         id: row['學號'] || '',
                         present: parseInt(row['點名有到次數'] || 0, 10),
                         leave: parseInt(row['請假次數'] || 0, 10),
-                        absent: absent,
-                        // 計算後的欄位
-                        calcSubmit: baseSubmit + extraSubmit,
-                        calcMissing: baseMissing - extraSubmit,
-                        absentSubmit: extraSubmit
+                        calcSubmit: baseSubmit + extraSubmit
                     };
                 }).filter(s => s.name);
 
-                // 資料準備完畢，解鎖搜尋框與按鈕
                 document.getElementById('searchInput').disabled = false;
                 const searchBtn = document.getElementById('searchBtn');
                 searchBtn.disabled = false;
@@ -204,7 +171,6 @@
             }
         }
 
-        // 載入網頁時初始化資料
         initData();
 
         function toggleAllStudents() {
@@ -212,7 +178,6 @@
             const tbody = document.getElementById('allStudentsTbody');
             
             if (listDiv.classList.contains('hidden')) {
-                // 檢查密碼
                 const password = prompt("請輸入助教密碼：");
                 if (password !== "GUAVA") {
                     if (password !== null) { 
@@ -230,24 +195,12 @@
                         ? `<span class="font-mono text-blue-600">${s.id}</span>` 
                         : `<span class="text-red-500 font-bold text-xs bg-red-100 px-2 py-1 rounded">無學號資料</span>`;
                         
-                    // 助教總表的顏色標註邏輯
-                    const absentHtml = s.absent > 2 
-                        ? `<span class="text-red-600 font-bold">${s.absent}</span>` 
-                        : `<span class="text-gray-700">${s.absent}</span>`;
-                        
-                    const missingHtml = s.calcMissing > 2 
-                        ? `<span class="text-red-600 font-bold">${s.calcMissing}</span>` 
-                        : `<span class="text-gray-700">${s.calcMissing}</span>`;
-
                     tr.innerHTML = `
-                        <td class="px-3 py-2 font-medium text-gray-900 whitespace-nowrap bg-white sticky left-0 z-10 shadow-[1px_0_0_0_#e5e7eb]">${s.name}</td>
-                        <td class="px-3 py-2 whitespace-nowrap">${idDisplay}</td>
-                        <td class="px-2 py-2 text-center text-green-600">${s.present}</td>
-                        <td class="px-2 py-2 text-center text-gray-600">${s.leave}</td>
-                        <td class="px-2 py-2 text-center">${absentHtml}</td>
-                        <td class="px-2 py-2 text-center text-green-600 border-l border-gray-200">${s.calcSubmit}</td>
-                        <td class="px-2 py-2 text-center">${missingHtml}</td>
-                        <td class="px-2 py-2 text-center text-blue-600">${s.absentSubmit}</td>
+                        <td class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap bg-white sticky left-0 z-10 shadow-[1px_0_0_0_#e5e7eb]">${s.name}</td>
+                        <td class="px-3 py-3 whitespace-nowrap">${idDisplay}</td>
+                        <td class="px-3 py-3 text-center text-green-600 border-l border-gray-200">${s.present}</td>
+                        <td class="px-3 py-3 text-center text-gray-600">${s.leave}</td>
+                        <td class="px-3 py-3 text-center text-blue-600">${s.calcSubmit}</td>
                     `;
                     tbody.appendChild(tr);
                 });
@@ -269,36 +222,15 @@
                 return;
             }
 
-            // 僅比對學號，忽略大小寫
             const student = studentData.find(s => s.id && s.id.toLowerCase() === searchInput.toLowerCase());
 
             if (student) {
                 document.getElementById('resName').textContent = student.name;
                 document.getElementById('resId').textContent = student.id;
+                
                 document.getElementById('resPresent').textContent = student.present;
                 document.getElementById('resLeave').textContent = student.leave;
-                
-                // 處理缺席次數標色 (> 2 標紅)
-                const elAbsent = document.getElementById('resAbsent');
-                elAbsent.textContent = student.absent;
-                if (student.absent > 2) {
-                    elAbsent.className = "text-xl font-bold text-red-600";
-                } else {
-                    elAbsent.className = "text-xl font-bold text-gray-600";
-                }
-
                 document.getElementById('resSubmit').textContent = student.calcSubmit;
-                
-                // 處理缺交次數標色 (> 2 標紅)
-                const elMissing = document.getElementById('resMissing');
-                elMissing.textContent = student.calcMissing;
-                if (student.calcMissing > 2) {
-                    elMissing.className = "text-xl font-bold text-red-600";
-                } else {
-                    elMissing.className = "text-xl font-bold text-gray-600";
-                }
-
-                document.getElementById('resAbsentSubmit').textContent = student.absentSubmit;
                 
                 resultContainer.classList.remove('hidden');
             } else {
